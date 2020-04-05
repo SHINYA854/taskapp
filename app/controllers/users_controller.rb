@@ -1,5 +1,9 @@
 class UsersController < ApplicationController
   
+  def index
+    @user = User.find(params[:id])
+  end
+  
   def show
     @user = User.find(params[:id])
   end
@@ -18,6 +22,18 @@ class UsersController < ApplicationController
       render :new
     end
   end
+  
+  def current_user
+    if session[:user_id]
+      if @current_user.nil?
+        @current_user = User.find(id: session[:user_id])
+      else
+        @current_user
+      end
+    end
+  end  
+  
+  
   
   private
   
