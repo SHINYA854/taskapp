@@ -1,16 +1,17 @@
 <% provide(:title, 'Sign up') %>
-<h1>タスク新規作成</h1>
+<h1>タスク編集</h1>
 
 <div class="row">
-  <div class="col-md-6 col-md-offset-3">
-    <%= form_with(model: @task, url: user_tasks_path, local: true) do |f| %>
+  <div class="col-md-8 col-md-offset-2">
+    <%= form_with(model: @task, url: user_task_path(current_user, @task.id), local: true) do |f| %>
       <%= f.label :task_title, '名称', class: "label-form" %>
       <%= f.text_field :task_title, class: "form-control" %>
 
       <%= f.label :task_content, '詳細', class: "label-form" %>
       <%= f.text_area :task_content, :size => "20x5", class: "form-control" %>
 
-      <%= f.submit "新規登録", class: "btn btn-primary btn-form btn-signup" %>
+      <%= f.submit "更新", class: "btn btn-primary btn-form" %>
+      <%= link_to "キャンセル", user_tasks_path(@task.user_id), class: "btn btn-default btn-form" %>
     <% end %>
   </div>
 </div>
